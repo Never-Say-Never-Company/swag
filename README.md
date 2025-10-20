@@ -102,6 +102,87 @@ O objetivo deste produto é fornecer uma plataforma de gestão e análise de des
 | **Sprint 2** | **Construção do Data Warehouse e Dashboards Essenciais** | Implementação do ETL (extração e carga) e dos indicadores de maior prioridade. | **US001, US002, US003, US004, US005** (Indicadores de Alto Impacto). **Implementação do ETL** e do DW (RF2). **Controle de Acesso de Custo** (RF6). |
 | **Sprint 3** | **Refinamento, Métricas Individuais e Qualidade/Documentação** | Implementação das métricas mais detalhadas, escalabilidade (RNF7), testes e documentação final (RNF2, RNF3). | **US006, US007, US008, US009** (Métricas de Desempenho Individual e Funcionalidade de Perfis). **Testes e Qualidade** (RNF11), **Documentação Final** (RNF2, RNF3). |
 
+
+# 🌳 Estratégia de Branching e Commit
+<details>
+<summary>Clique para expandir a documentação completa da Estratégia</summary>
+Esta documentação descreve a estrutura dos nossos repositórios, o fluxo de trabalho de desenvolvimento, a estratégia de *branching* (ramificação) e os padrões de *commit* (registro de alterações) adotados pela equipe.
+
+## 1\. Estrutura dos Repositórios
+
+Nosso projeto está organizado em três repositórios distintos, seguindo a separação de responsabilidades:
+
+| Repositório | Descrição |
+| :--- | :--- |
+| `swagback` | Desenvolvimento do *backend*. |
+| `swagfront` | Desenvolvimento do *frontend*. |
+| `swag` | Repositório dedicado à documentação do projeto. |
+
+**Importante:** A estratégia de *branching* e o padrão de *commits* detalhados abaixo se aplicam **igualmente aos três repositórios**.
+
+## 2\. Fluxo de Branching (Estratégia por Sprint)
+
+Adotamos um fluxo baseado em *sprints*, onde a *branch* principal (`main`) reflete sempre o estado de produção estável e uma *branch* intermediária gerencia o desenvolvimento da sprint atual.
+
+### 2.1. Branches Principais
+
+  * **`main`**: A *branch* principal. **Sempre deve conter código estável e pronto para produção.** O *merge* direto na `main` é proibido; todas as alterações chegam via *merge* da *branch* da Sprint.
+
+### 2.2. Branches de Sprint
+
+  * **Nomeclatura:** `Sprint<número da sprint atual>` (Ex: `Sprint1`, `Sprint2`, `Sprint10`).
+  * **Criação:** No início de cada ciclo de desenvolvimento (Sprint), uma nova *branch* é criada a partir da **`main`**.
+  * **Propósito:** Esta *branch* serve como o **ambiente de integração** para todas as *tasks* da sprint. Todas as *branches* de *features* ou *fixes* são mergeadas nela.
+  * **Fechamento da Sprint:** Ao final da Sprint, após a conclusão e validação do código, a *branch* da sprint é **mergeada na `main`**. A *branch* da sprint anterior é descontinuada (ou mantida como histórico, a critério da equipe).
+
+### 2.3. Branches de Task (Desenvolvimento)
+
+  * **Criação:** Para o desenvolvimento de qualquer *task* (nova *feature*, correção de *bug*, refatoração, etc.), o desenvolvedor deve criar uma nova *branch* **a partir da *branch* da sprint atual** (`Sprint<número>`).
+  * **Propósito:** Isolar o desenvolvimento de uma única *task* ou correção.
+  * **Merge:** Após a conclusão e o **Code Review**, esta *branch* é mergeada de volta na **`Sprint<número da sprint atual>`**.
+
+## 3\. Padrão de Commit (Convenção Semântica)
+
+Para manter um histórico de commits limpo e significativo, é **obrigatório** seguir o padrão de commit semântico abaixo:
+
+### 3.1. Formato
+
+```
+<tipo da task>(#<número do card da task>): <descrição breve do que foi feito>
+```
+
+**Exemplo:**
+
+```
+feat(#34): desenvolvido método para coleta de dados
+```
+
+ou
+
+```
+fix(#15): corrigida quebra de layout na página inicial
+```
+
+### 3.2. Tipos de Task (Principais)
+
+| Tipo | Descrição |
+| :--- | :--- |
+| `feat` | Uma nova *feature* ou funcionalidade. |
+| `fix` | Uma correção de *bug*. |
+| `docs` | Alterações apenas na documentação. |
+| `style` | Mudanças que não afetam o significado do código (espaços, formatação, ponto e vírgula, etc.). |
+| `refactor` | Uma mudança de código que não corrige um bug nem adiciona uma feature. |
+| `test` | Adicionando testes ausentes ou corrigindo testes existentes. |
+| `chore` | Mudanças na build, dependências ou outras ferramentas e bibliotecas externas. |
+
+### 3.3. Pull Requests (PRs)
+
+1.  Após finalizar o desenvolvimento em sua *branch* de *task*, o desenvolvedor deve abrir um **Pull Request (PR)**.
+2.  O PR deve ter como **destino** a *branch* da sprint atual (Ex: `Sprint<número>`).
+3.  O PR deve ser revisado por pelo menos um membro da equipe (Code Review).
+4.  Após a **aprovação**, a *branch* de *task* é mergeada na *branch* da Sprint.
+</details>
+
 ## <a id="tecnologias-utilizadas"> Tecnologias Utilizadas</a>
 
 ### **Back-end**
